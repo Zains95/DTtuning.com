@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Contact Us — DT Tuning</title>
+<meta content="Contact DT Tuning &amp; Development." name="description"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="assets/styles.css" rel="stylesheet"/>
+</head>
+<body class="contact-page">
+<header class="carbon">
+<div class="container nav">
+<div class="brand">
+<img alt="DT Tuning &amp; Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&amp;url=%2Flogo.png&amp;w=640"/>
+</div>
+<nav class="nav-links">
+<a href="index.html">Home</a>
+<a href="service.html">File Service</a>
+<a href="remaps.html">Remaps</a>
+<a href="store.html">Store</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact Us</a>
+</nav>
+<div class="cta">
+<a class="btn btn-ghost" href="tel:‪+447782298093‬" title="Call us"><img alt="Call" src="assets/phone.png" style="height:44px;width:44px;vertical-align:middle"/></a>
+<a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp"><img alt="WhatsApp" src="assets/whatsapp.png" style="height:44px;width:44px;vertical-align:middle"/></a>
+<a class="btn btn-primary" href="book.html">Book Now</a>
+</div>
+</div>
+</header>
+<section class="hero-banner carbon">
+<img alt="Audi S5 Front" class="rounded" src="assets/S5 Front.jpg"/>
+<div class="hero-content container">
+<h1>Get in touch to get started now! — File Services &amp; Remapping Services</h1>
+<p>High-quality, custom-developed tuning files from experienced in-house technicians. ECU/TCU remaps, DPF/EGR/AdBlue solutions, and training — UK based, serving worldwide.</p>
+<div class="hero-actions"></div>
+</div>
+</section>
+<section class="sections">
+<div class="container tile-grid">
+<h1 class="h1">Contact Us</h1>
+<p class="sub">Have a question about remaps, file service, or tools? Use the form and we’ll get back to you.</p>
+<div class="success" id="msg-success">Thanks — your message has been sent. We’ll get back to you soon.</div>
+<div class="error" id="msg-error">Sorry, something went wrong sending your message. Please try again or email info@dttuning.com.</div>
+<form action="contact-send.php" class="form-wrap" method="post" onsubmit="return validateForm(event)">
+<!-- honeypot -->
+<div class="honeypot">
+<label>If you are a human, leave this field blank</label>
+<input autocomplete="off" name="company" tabindex="-1" type="text"/>
+</div>
+<div class="form-grid">
+<div>
+<label for="name">Full name</label>
+<input class="input" id="name" name="name" placeholder="Your name" required="" type="text"/>
+</div>
+<div>
+<label for="phone">Phone</label>
+<input class="input" id="phone" name="phone" pattern="[0-9+()\-\s]{6,}" placeholder="+44 ..." type="tel"/>
+</div>
+<div>
+<label for="email">Email</label>
+<input class="input" id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+</div>
+<div>
+<label for="subject">Subject</label>
+<input class="input" id="subject" name="subject" placeholder="What’s this about?" required="" type="text"/>
+</div>
+<div class="full">
+<label for="message">Message</label>
+<textarea class="textarea" id="message" name="message" placeholder="Tell us what you need…" required=""></textarea>
+</div>
+</div>
+<div class="form-actions">
+<button class="btn btn-primary" type="submit">Send Message</button>
+<span class="small">Or email: info@dttuning.com · WhatsApp: 07782 298093</span>
+</div>
+</form>
+</div>
+</section>
+<script src="assets/contact.js"></script>
+<script>
+function validateForm(e){
+  const email = document.getElementById('email').value.trim();
+  const name = document.getElementById('name').value.trim();
+  const msg = document.getElementById('message').value.trim();
+  if(!email || !name || !msg){return false;}
+  return true;
+}
+</script>
+<footer class="carbon">
+<div class="container foot">
+<div>
+<strong>DT Tuning &amp; Development</strong><br/>
+<small>Based in London, United Kingdom — Serving the UK &amp; Worldwide</small><br/><br/>
+<small>Email: info@dttuning.com  |  Phone: 07782 298093</small>
+</div>
+<div>
+<small>© <span id="y"></span> DT Tuning &amp; Development Ltd. All rights reserved.</small><br/>
+<small><a href="#">Privacy</a> · <a href="#">Terms</a></small>
+</div>
+</div>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+<div class="fab-dock">
+<a href="tel:+447782298093" aria-label="Call"><img src="assets/Phone.png" alt="Call"></a>
+<a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/Whatsapp.png" alt="WhatsApp"></a>
+</div>
+</body>
+</html>

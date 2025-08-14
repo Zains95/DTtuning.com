@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Vehicle Remapping — DT Tuning</title>
+  <meta name="description" content="Stage 1–3, economy remaps, gearbox tuning, and software solutions."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link href="assets/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<header class="carbon">
+  <div class="container nav">
+    <div class="brand">
+      <img alt="DT Tuning & Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&url=%2Flogo.png&w=640"/>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="service.html">File Service</a>
+      <a href="remaps.html">Remaps</a>
+      <a href="store.html">Store</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+    <div class="cta">
+      <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
+        <img alt="Call" src="assets/phone.png" style="height:44px;width:44px;vertical-align:middle"/>
+      </a>
+      <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp">
+        <img alt="WhatsApp" src="assets/whatsapp.png" style="height:44px;width:44px;vertical-align:middle"/>
+      </a>
+      <a class="btn btn-primary" href="book.html">Book Now</a>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <h1 class="h2">Vehicle Remapping</h1>
+    <p class="sub">Stage 1–3 packages, economy remaps for diesel, and options like speed limiter removal. DPF/EGR/AdBlue software solutions available on request.</p>
+
+    <div class="list">
+      <div class="card">
+        <img alt="BMW remap" class="rounded" src="assets/yellow_headlight.jpg"/>
+        <p><strong>Stage 1</strong><br/>Safe, effective power gain with no hardware changes.</p>
+        <p style="font-size: 2rem; color: rgb(242, 226, 1); font-weight: bold; margin-top: 8px;">From £185</p>
+      </div>
+
+      <div class="card">
+        <img alt="Supercar tuning" class="rounded" src="assets/gold_golf.jpg"/>
+        <p><strong>Stage 2/3</strong><br/>For performance builds with hardware mods.</p>
+        <p style="font-size: 2rem; color: rgb(242, 226, 1); font-weight: bold; margin-top: 8px;">From £245 - POA</p>
+      </div>
+
+      <div class="card">
+        <img alt="Pops and bangs" class="rounded" src="assets/golf_flames.jpg"/>
+        <p><strong>Pops &amp; Bangs</strong><br/>Exhaust acoustics where legal and requested.</p>
+        <p style="font-size: 2rem; color: rgb(242, 226, 1); font-weight: bold; margin-top: 8px;">Optional Add Ons</p>
+      </div>
+
+      <div class="card">
+        <img alt="Gearbox TCU" class="rounded" src="assets/red_taillight.jpg"/>
+        <p><strong>TCU/Gearbox</strong><br/>Smoother shifts and torque optimisation.</p>
+        <p style="font-size: 2rem; color: rgb(242, 226, 1); font-weight: bold; margin-top: 8px;">From £195</p>
+      </div>
+    </div>
+
+    <!-- Book Remap Button (scrolls to checker) -->
+    <div style="text-align:center; margin-top: 30px;">
+      <a class="btn btn-primary" href="#bhp-gains">Book Your Remap</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Gains checker section -->
+<section class="container" id="bhp-gains">
+  <div class="section">
+    <div class="list">
+      <div class="card">
+        <h3>Check your BHP gains</h3>
+        <p>Enter your reg or select your vehicle to see estimated power/torque gains.</p>
+
+        <!-- Embed the Bensky widget right inside this container -->
+        <div class="api-box" id="vehicle-check">
+          <!-- Bensky API (as provided) -->
+          <script src="https://portal.bensky.co.uk/w.php?id=1495&js=1"></script>
+        </div>
+
+        <!-- Proceed button will be injected here when results appear -->
+        <div id="proceed-wrap"></div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="carbon">
+  <div class="container foot">
+    <div>
+      <strong>DT Tuning &amp; Development</strong><br/>
+      <small>Based in London, United Kingdom — Serving the UK &amp; Worldwide</small><br/><br/>
+      <small>Email: info@dttuning.com  |  Phone: 07782 298093</small>
+    </div>
+    <div>
+      <small>© <span id="y"></span> DT Tuning &amp; Development Ltd. All rights reserved.</small><br/>
+      <small><a href="#">Privacy</a> · <a href="#">Terms</a></small>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // Smooth scroll for in-page anchors (Book Your Remap → checker)
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      const to = document.querySelector(this.getAttribute('href'));
+      if (to) to.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // When the Bensky widget injects content, add a "Proceed to Booking" button under it
+  (function(){
+    const target = document.getElementById('vehicle-check');
+    if (!target) return;
+
+    const addProceedBtn = () => {
+      // Avoid duplicates
+      if (document.getElementById('proceed-booking')) return;
+      const wrap = document.getElementById('proceed-wrap');
+      const btn = document.createElement('a');
+      btn.id = 'proceed-booking';
+      btn.href = 'book.html';
+      btn.className = 'btn btn-primary';
+      btn.textContent = 'Proceed to Booking';
+      btn.style.display = 'inline-block';
+      btn.style.marginTop = '20px';
+      wrap.appendChild(btn);
+    };
+
+    // Observe for any child nodes added by the widget
+    const obs = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.addedNodes && m.addedNodes.length) {
+          addProceedBtn();
+          break;
+        }
+      }
+    });
+    obs.observe(target, { childList: true, subtree: true });
+
+    // Fallback: add button after a short delay in case widget renders asynchronously
+    setTimeout(addProceedBtn, 4000);
+  })();
+</script>
+
+<div class="fab-dock">
+  <a href="tel:+447782298093" aria-label="Call"><img src="assets/Phone.png" alt="Call"></a>
+  <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/whatsapp.png" alt="WhatsApp"></a>
+</div>
+
+</body>
+</html>
