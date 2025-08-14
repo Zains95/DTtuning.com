@@ -39,61 +39,6 @@
   </div>
 </header>
 
-<!-- Mobile-only quick actions (hidden on desktop via CSS) -->
-<script>
-(function(){
-  const burger = document.querySelector('.burger');
-  const nav = document.querySelector('.nav-links');
-
-  if (!burger || !nav) return;
-
-  const openMenu = () => {
-    burger.classList.add('active');
-    nav.classList.add('active');
-    document.body.classList.add('menu-open');
-  };
-
-  const closeMenu = () => {
-    burger.classList.remove('active');
-    nav.classList.remove('active');
-    document.body.classList.remove('menu-open');
-  };
-
-  // ✅ Make sure menu is CLOSED on load (handles iOS bfcache too)
-  closeMenu();
-  window.addEventListener('pageshow', closeMenu);
-
-  // Toggle on burger tap
-  burger.addEventListener('click', (e) => {
-    e.preventDefault();
-    const isOpen = nav.classList.contains('active');
-    isOpen ? closeMenu() : openMenu();
-  });
-
-  // ✅ Intercept mobile nav link taps: close first, then navigate
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    a.addEventListener('click', (e) => {
-      if (window.matchMedia('(max-width: 980px)').matches) {
-        e.preventDefault();
-        const href = a.getAttribute('href');
-        closeMenu();
-        setTimeout(() => { window.location.href = href; }, 150);
-      }
-    });
-  });
-
-  // Close if the viewport becomes desktop size
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 980) closeMenu();
-  });
-
-  // ESC to close
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
-  });
-})();
-</script>
-
 <section class="section">
   <div class="container">
     <h1 class="h2">Remap File Service for Tuners</h1>
@@ -144,27 +89,63 @@
 </div>
 
 <script>
-  // Burger menu open/close + overlay dim
+/* ========= Single robust mobile menu controller (no duplicates) ========= */
+(function(){
   const burger = document.querySelector('.burger');
-  const nav = document.querySelector('.nav-links');
+  const nav    = document.querySelector('.nav-links');
+  if (!burger || !nav) return;
 
-  burger.addEventListener('click', () => {
-    const expanded = burger.getAttribute('aria-expanded') === 'true';
-    burger.setAttribute('aria-expanded', String(!expanded));
-    burger.classList.toggle('active');
-    nav.classList.toggle('active');
-    document.body.classList.toggle('menu-open');
+  const openMenu = () => {
+    burger.classList.add('active');
+    burger.setAttribute('aria-expanded','true');
+    nav.classList.add('active');
+    document.body.classList.add('menu-open');
+  };
+  const closeMenu = () => {
+    burger.classList.remove('active');
+    burger.setAttribute('aria-expanded','false');
+    nav.classList.remove('active');
+    document.body.classList.remove('menu-open');
+  };
+
+  // Ensure closed on load + bfcache restore
+  closeMenu();
+  window.addEventListener('pageshow', closeMenu);
+
+  // Toggle on burger tap
+  burger.addEventListener('click', (e) => {
+    e.preventDefault();
+    nav.classList.contains('active') ? closeMenu() : openMenu();
   });
 
-  // Close menu after clicking any nav link
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      burger.setAttribute('aria-expanded', 'false');
-      burger.classList.remove('active');
-      nav.classList.remove('active');
-      document.body.classList.remove('menu-open');
+  // Close on nav link tap (mobile): close first, then navigate
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', (e) => {
+      if (window.matchMedia('(max-width: 980px)').matches) {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        closeMenu();
+        setTimeout(() => { window.location.href = href; }, 120);
+      }
     });
   });
+
+  // Close when clicking outside the header/nav (dim overlay)
+  document.addEventListener('click', (e) => {
+    if (!document.body.classList.contains('menu-open')) return;
+    if (!e.target.closest('header')) closeMenu();
+  });
+
+  // Close if resizing to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980) closeMenu();
+  });
+
+  // Esc to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
 </script>
 </body>
 </html>

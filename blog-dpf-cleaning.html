@@ -37,68 +37,13 @@
 </header>
 
 <section class="hero-banner carbon">
-  <!-- Add your banner image here -->
+  <!-- Banner image -->
   <img class="rounded" src="assets/ADD-IMAGE-HERE.jpg" alt="Diesel DPF care hero"/>
 
   <div class="hero-content container">
     <h1>Diesel Economy Maps & DPF Care — What to Expect</h1>
     <p>Improve MPG without compromising DPF health — real-world advice and maintenance tips.</p>
   </div>
-
-  <!-- ✅ Mobile quick actions (hidden on desktop via CSS) -->
-<script>
-(function(){
-  const burger = document.querySelector('.burger');
-  const nav = document.querySelector('.nav-links');
-
-  if (!burger || !nav) return;
-
-  const openMenu = () => {
-    burger.classList.add('active');
-    nav.classList.add('active');
-    document.body.classList.add('menu-open');
-  };
-
-  const closeMenu = () => {
-    burger.classList.remove('active');
-    nav.classList.remove('active');
-    document.body.classList.remove('menu-open');
-  };
-
-  // ✅ Make sure menu is CLOSED on load (handles iOS bfcache too)
-  closeMenu();
-  window.addEventListener('pageshow', closeMenu);
-
-  // Toggle on burger tap
-  burger.addEventListener('click', (e) => {
-    e.preventDefault();
-    const isOpen = nav.classList.contains('active');
-    isOpen ? closeMenu() : openMenu();
-  });
-
-  // ✅ Intercept mobile nav link taps: close first, then navigate
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    a.addEventListener('click', (e) => {
-      if (window.matchMedia('(max-width: 980px)').matches) {
-        e.preventDefault();
-        const href = a.getAttribute('href');
-        closeMenu();
-        setTimeout(() => { window.location.href = href; }, 150);
-      }
-    });
-  });
-
-  // Close if the viewport becomes desktop size
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 980) closeMenu();
-  });
-
-  // ESC to close
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
-  });
-})();
-</script>
 </section>
 
 <section class="sections">
@@ -157,23 +102,56 @@
 }
 </script>
 
+<!-- ✅ Single, robust mobile menu controller (only script handling the menu) -->
 <script>
-const burger = document.querySelector('.burger');
-const nav = document.querySelector('.nav-links');
+(function(){
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('.nav-links');
+  if (!burger || !nav) return;
 
-burger.addEventListener('click', () => {
-  burger.classList.toggle('active');
-  nav.classList.toggle('active');
-  document.body.classList.toggle('menu-open');
-});
-
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
+  const openMenu = () => {
+    burger.classList.add('active');
+    nav.classList.add('active');
+    document.body.classList.add('menu-open');
+  };
+  const closeMenu = () => {
     burger.classList.remove('active');
     nav.classList.remove('active');
     document.body.classList.remove('menu-open');
+  };
+
+  // Ensure closed on load and on iOS bfcache restore
+  closeMenu();
+  window.addEventListener('pageshow', closeMenu);
+
+  // Toggle
+  burger.addEventListener('click', (e) => {
+    e.preventDefault();
+    nav.classList.contains('active') ? closeMenu() : openMenu();
   });
-});
+
+  // Close first on mobile, then navigate
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', (e) => {
+      if (window.matchMedia('(max-width: 980px)').matches) {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        closeMenu();
+        setTimeout(() => { window.location.href = href; }, 120);
+      }
+    });
+  });
+
+  // Close on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980) closeMenu();
+  });
+
+  // ESC closes
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
 </script>
 </body>
 </html>
