@@ -22,6 +22,11 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact Us</a>
     </nav>
+    <button class="burger" aria-label="Toggle menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
     <div class="cta">
       <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
         <img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle"/>
@@ -41,6 +46,17 @@
     <h1>Book a Remap</h1>
     <p class="sub">Use the vehicle checker to find gains, then request a booking slot.</p>
   </div>
+
+  <div class="cta header-cta">
+  <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
+    <img alt="Call" src="assets/Phone.png"/>
+  </a>
+  <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp">
+    <img alt="WhatsApp" src="assets/Whatsapp.png"/>
+  </a>
+  <a class="btn btn-primary" href="book.html">Book Now</a>
+</div>
+
 </section>
 
 <!-- CONTENT UNDER HERO (API + info) -->
@@ -80,5 +96,23 @@
   <a href="tel:+447782298093" aria-label="Call"><img src="assets/Phone.png" alt="Call"></a>
   <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/Whatsapp.png" alt="WhatsApp"></a>
 </div>
+<script>
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav-links');
+
+burger.addEventListener('click', () => {
+  burger.classList.toggle('active');
+  nav.classList.toggle('active');
+  document.body.classList.toggle('menu-open');
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    burger.classList.remove('active');
+    nav.classList.remove('active');
+    document.body.classList.remove('menu-open');
+  });
+});
+</script>
 </body>
 </html>

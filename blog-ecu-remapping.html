@@ -23,6 +23,11 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact Us</a>
     </nav>
+    <button class="burger" aria-label="Toggle menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
     <div class="cta">
       <a class="btn btn-ghost" href="tel:+447782298093" title="Call us"><img src="assets/Phone.png" alt="Call" style="height:44px;width:44px;vertical-align:middle"/></a>
       <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp"><img src="assets/Whatsapp.png" alt="WhatsApp" style="height:44px;width:44px;vertical-align:middle"/></a>
@@ -38,6 +43,17 @@
     <h1>Top 7 Benefits of ECU Remapping</h1>
     <p>How a Stage 1 remap transforms torque, drivability and confidence — while staying within safe limits.</p>
   </div>
+
+  <div class="cta header-cta">
+  <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
+    <img alt="Call" src="assets/Phone.png"/>
+  </a>
+  <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp">
+    <img alt="WhatsApp" src="assets/Whatsapp.png"/>
+  </a>
+  <a class="btn btn-primary" href="book.html">Book Now</a>
+</div>
+
 </section>
 
 <section class="sections">
@@ -100,6 +116,23 @@
   "publisher":{"@type":"Organization","name":"DT Tuning & Development"}
 }
 </script>
-</body>
+<script>
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav-links');
 
+burger.addEventListener('click', () => {
+  burger.classList.toggle('active');
+  nav.classList.toggle('active');
+  document.body.classList.toggle('menu-open');
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    burger.classList.remove('active');
+    nav.classList.remove('active');
+    document.body.classList.remove('menu-open');
+  });
+});
+</script>
+</body>
 </html>
