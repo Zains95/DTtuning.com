@@ -56,7 +56,10 @@ header{position:sticky;top:0;background:#0c0d11d9;backdrop-filter:saturate(1.2) 
 /* Home / hero */
 .hero-banner{position:relative;min-height:62vh;display:grid;place-items:center;overflow:hidden;border-radius:var(--radius)}
 .hero-banner::before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;background:radial-gradient(1200px 600px at 50% -20%, rgba(255,204,0,.25), transparent 60%)}
-.hero-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.05) brightness(.6) saturate(1.1)}
+
+/* ✅ Critical fix: only style the hero's direct background image */
+.hero-banner > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.05) brightness(.6) saturate(1.1)}
+
 .hero-content{position:relative;text-align:center;color:#fff;padding:24px}
 .hero-content h1{font-size:clamp(30px,4vw,56px);line-height:1.05;margin:0 0 12px;text-shadow:0 2px 20px rgba(0,0,0,.5)}
 .hero-content p{max-width:900px;margin:0 auto 18px;color:#cbd5e1}
@@ -74,6 +77,7 @@ header{position:sticky;top:0;background:#0c0d11d9;backdrop-filter:saturate(1.2) 
 @media (max-width:640px){.tile-grid{grid-template-columns:1fr}}
 .mid-banner{position:relative;margin:22px 0;border-radius:var(--radius);overflow:hidden;min-height:260px}
 .mid-banner .carbon{position:absolute;inset:0;opacity:.9}
+/* OK for mid-banner because it contains only the bg image */
 .mid-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.55;filter:brightness(.9)}
 .mid-banner .copy{position:relative;color:#fff;padding:36px;max-width:720px;text-shadow:0 1px 10px rgba(0,0,0,.5)}
 .band{background:linear-gradient(180deg,#0b0c10,#0e1015);color:#fff;padding:22px 0;border-radius:var(--radius);margin:26px 0;border:1px solid rgba(255,255,255,.06)}
@@ -131,29 +135,32 @@ label{display:block;font-weight:700;margin-bottom:6px;color:#fff}
 .contact-page .form-grid { grid-template-columns:1fr 1fr; }
 @media (max-width:768px){ .contact-page .form-grid { grid-template-columns:1fr; } }
 .contact-page .hero-banner { min-height:70vh; }
-.contact-page .hero-banner img { object-position:70% 68%; }
+/* The hero image on contact page is the direct child as well */
+.contact-page .hero-banner > img { object-position:70% 68%; }
 @media (max-width:778px){
   .contact-page .hero-banner { min-height:50vh; }
-  .contact-page .hero-banner img { object-position:70% 68%; }
+  .contact-page .hero-banner > img { object-position:70% 68%; }
 }
 
 /* Book Now page */
 .booknow-banner { min-height:62vh; }
-.booknow-banner img { object-fit:cover; object-position:center 70%; }
+/* ✅ Critical fix: direct child only */
+.booknow-banner > img { object-fit:cover; object-position:center 70%; }
 @media (max-width:768px){
   .booknow-banner { min-height:56vh; }
-  .booknow-banner img { object-position:50% 60%; }
+  .booknow-banner > img { object-position:50% 60%; }
 }
 
 /* FAQ hero */
+/* ✅ Critical fix: direct child only */
 .faq-hero { min-height:62vh; }
-.faq-hero img{
+.faq-hero > img{
   object-fit:cover;
   object-position:24% center;
   filter:grayscale(.04) brightness(.72) saturate(1.05);
 }
-@media (max-width:900px){ .faq-hero { min-height:54vh; } .faq-hero img{ object-position:30% center; } }
-@media (max-width:560px){ .faq-hero { min-height:48vh; } .faq-hero img{ object-position:34% center; } }
+@media (max-width:900px){ .faq-hero { min-height:54vh; } .faq-hero > img{ object-position:30% center; } }
+@media (max-width:560px){ .faq-hero { min-height:48vh; } .faq-hero > img{ object-position:34% center; } }
 
 /* Burger menu button (hidden on desktop) */
 .burger {
@@ -255,7 +262,9 @@ label{display:block;font-weight:700;margin-bottom:6px;color:#fff}
     background:var(--brand); color:#050504; border:none;
     box-shadow:0 6px 18px rgba(255,204,0,.25);
   }
-  .hero-cta .hero-book:hover{ background:var(--brand-dark); }}
-  /* Show this strip only on mobile (fixes remaps.html duplication on desktop) */
+  .hero-cta .hero-book:hover{ background:var(--brand-dark); }
+}
+
+/* Show this strip only on mobile (used on a few content pages) */
 @media (min-width: 981px){
   .mobile-only { display: none !important; }}

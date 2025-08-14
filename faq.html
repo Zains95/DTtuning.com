@@ -14,7 +14,7 @@
 <header class="carbon">
   <div class="container nav">
     <div class="brand">
-      <img alt="DT Tuning & Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&url=%2Flogo.png&w=640"/>
+      <img alt="DT Tuning & Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&url=%2Flogo.png&w=640" loading="lazy"/>
     </div>
     <nav class="nav-links">
       <a href="index.html">Home</a>
@@ -24,22 +24,22 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact Us</a>
     </nav>
-    <button class="burger" aria-label="Toggle menu">
+    <button class="burger" aria-label="Toggle menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
     <div class="cta">
-      <a class="btn btn-ghost" href="tel:+447782298093" title="Call us"><img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle"/></a>
-      <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp"><img alt="WhatsApp" src="assets/Whatsapp.png" style="height:44px;width:44px;vertical-align:middle"/></a>
+      <a class="btn btn-ghost" href="tel:+447782298093" title="Call us"><img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle" loading="lazy"/></a>
+      <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp"><img alt="WhatsApp" src="assets/Whatsapp.png" style="height:44px;width:44px;vertical-align:middle" loading="lazy"/></a>
       <a class="btn btn-primary" href="book.html">Book Now</a>
     </div>
   </div>
 </header>
 
 <!-- Hero Banner -->
-<section class="hero-banner carbon">
-  <img alt="FAQ banner" class="rounded" src="assets/Audi S5 Wheels.jpg"/>
+<section class="hero-banner carbon faq-hero">
+  <img alt="FAQ banner" class="rounded" src="assets/Audi S5 Wheels.jpg" loading="lazy"/>
   <div class="hero-content container">
     <h1>Frequently Asked Questions</h1>
     <p>Everything you need to know about remapping, tuning, and our services.</p>
@@ -49,10 +49,10 @@
   <div class="hero-cta" aria-label="Quick actions">
     <div class="icon-row">
       <a href="tel:+447782298093" aria-label="Call">
-        <img src="assets/Phone.png" alt="Call">
+        <img src="assets/Phone.png" alt="Call" loading="lazy">
       </a>
       <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <img src="assets/Whatsapp.png" alt="WhatsApp">
+        <img src="assets/Whatsapp.png" alt="WhatsApp" loading="lazy">
       </a>
     </div>
     <a class="hero-book" href="book.html">Book Now</a>
@@ -101,21 +101,21 @@
 
     <div class="blog-grid">
       <article class="card blog">
-        <img class="rounded" src="assets/Fuel Eco Stage 1.jpg" alt="Add image — ECU remapping benefits"/>
+        <img class="rounded" src="assets/Fuel Eco Stage 1.jpg" alt="ECU remapping benefits" loading="lazy"/>
         <h3><a href="blog-ecu-remapping.html">Top 7 Benefits of ECU Remapping</a></h3>
         <p>How a Stage 1 remap boosts torque, drivability and confidence — while staying within safe limits.</p>
         <p><a class="btn btn-primary" href="blog-ecu-remapping.html">Read More</a></p>
       </article>
 
       <article class="card blog">
-        <img class="rounded" src="assets/Remap.jpg" alt="Add image — Diesel DPF care"/>
+        <img class="rounded" src="assets/Remap.jpg" alt="Diesel DPF care" loading="lazy"/>
         <h3><a href="blog-dpf-cleaning.html">Diesel Economy Maps & DPF Care</a></h3>
         <p>Real-world MPG, how economy maps work, and simple habits to keep your DPF healthy.</p>
         <p><a class="btn btn-primary" href="blog-dpf-cleaning.html">Read More</a></p>
       </article>
 
       <article class="card blog">
-        <img class="rounded" src="assets/Stage 3 car.jpg" alt="Add image — TCU tuning explained"/>
+        <img class="rounded" src="assets/Stage 3 car.jpg" alt="TCU tuning explained" loading="lazy"/>
         <h3><a href="blog-tcu-tuning.html">TCU Tuning Explained</a></h3>
         <p>What gearbox maps change, when to pair them with Stage 1–3, and the drivability gains.</p>
         <p><a class="btn btn-primary" href="blog-tcu-tuning.html">Read More</a></p>
@@ -151,6 +151,8 @@ const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');
 
 burger.addEventListener('click', () => {
+  const expanded = burger.getAttribute('aria-expanded') === 'true';
+  burger.setAttribute('aria-expanded', String(!expanded));
   burger.classList.toggle('active');
   nav.classList.toggle('active');
   document.body.classList.toggle('menu-open');
@@ -158,6 +160,7 @@ burger.addEventListener('click', () => {
 
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => {
+    burger.setAttribute('aria-expanded', 'false');
     burger.classList.remove('active');
     nav.classList.remove('active');
     document.body.classList.remove('menu-open');

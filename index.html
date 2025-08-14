@@ -12,7 +12,7 @@
 <header class="carbon">
   <div class="container nav">
     <div class="brand">
-      <img alt="DT Tuning &amp; Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&url=%2Flogo.png&w=640"/>
+      <img alt="DT Tuning &amp; Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&url=%2Flogo.png&w=640" loading="lazy"/>
     </div>
     <nav class="nav-links">
       <a href="index.html">Home</a>
@@ -22,23 +22,23 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact Us</a>
     </nav>
-    <button class="burger" aria-label="Toggle menu">
+    <button class="burger" aria-label="Toggle menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
     <div class="cta">
-      <a class="btn btn-ghost" href="tel:+447782298093" title="Call us"><img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle"/></a>
-      <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp"><img alt="WhatsApp" src="assets/Whatsapp.png" style="height:44px;width:44px;vertical-align:middle"/></a>
+      <a class="btn btn-ghost" href="tel:+447782298093" title="Call us"><img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle" loading="lazy"/></a>
+      <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp"><img alt="WhatsApp" src="assets/Whatsapp.png" style="height:44px;width:44px;vertical-align:middle" loading="lazy"/></a>
       <a class="btn btn-primary" href="book.html">Book Now</a>
     </div>
   </div>
 </header>
 
 <section class="hero-banner carbon">
-  <img alt="Lamborghini with doors up" class="rounded" src="assets/lambo_show.jpg"/>
+  <img alt="Lamborghini with doors up" class="rounded" src="assets/lambo_show.jpg" loading="lazy"/>
   <div class="hero-content container">
-    <h1>Start or grow your remapping business — file services &amp; tuning support</h1>
+    <h1>Professional Performance Tuning — file services &amp; tuning support</h1>
     <p>High-quality, custom-developed tuning files from experienced in-house technicians. ECU/TCU remaps, DPF/EGR/AdBlue solutions, and training — UK based, serving worldwide.</p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="service.html">File Service for Tuners</a>
@@ -50,10 +50,10 @@
   <div class="hero-cta" aria-label="Quick actions">
     <div class="icon-row">
       <a href="tel:+447782298093" aria-label="Call">
-        <img src="assets/Phone.png" alt="Call">
+        <img src="assets/Phone.png" alt="Call" loading="lazy">
       </a>
       <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <img src="assets/Whatsapp.png" alt="WhatsApp">
+        <img src="assets/Whatsapp.png" alt="WhatsApp" loading="lazy">
       </a>
     </div>
     <a class="hero-book" href="book.html">Book Now</a>
@@ -64,27 +64,27 @@
 <section class="sections">
   <div class="container tile-grid">
     <a class="tile-card tile-lg" href="remaps.html">
-      <img alt="BMW blue" class="rounded" src="assets/bmw_blue.jpg"/>
+      <img alt="BMW blue" class="rounded" src="assets/bmw_blue.jpg" loading="lazy"/>
       <span class="grad"></span><span class="label">Car &amp; Van Remaps</span><span class="chip">View more</span>
     </a>
     <a class="tile-card" href="service.html">
-      <img alt="Mercedes tuning interior" class="rounded" src="assets/merc_tuning.jpg"/>
+      <img alt="Mercedes tuning interior" class="rounded" src="assets/merc_tuning.jpg" loading="lazy"/>
       <span class="grad"></span><span class="label">ECU File Service</span><span class="chip">View more</span>
     </a>
     <a class="tile-card" href="faq.html">
-      <img alt="VW Golf flames" class="rounded" src="assets/golf_flames.jpg"/>
+      <img alt="VW Golf flames" class="rounded" src="assets/golf_flames.jpg" loading="lazy"/>
       <span class="grad"></span><span class="label">FAQ Page</span><span class="chip">Details</span>
     </a>
     <a class="tile-card" href="store.html">
-      <img alt="Lamborghini brake close-up" class="rounded" src="assets/lambo_brake.jpg"/>
+      <img alt="Lamborghini brake close-up" class="rounded" src="assets/lambo_brake.jpg" loading="lazy"/>
       <span class="grad"></span><span class="label">Octane Boosters &amp; Engine Lubricants</span><span class="chip">Shop</span>
     </a>
     <a class="tile-card" href="remaps.html#gearbox">
-      <img alt="McLaren on dyno" class="rounded" src="assets/mclaren_dyno.jpg"/>
+      <img alt="McLaren on dyno" class="rounded" src="assets/mclaren_dyno.jpg" loading="lazy"/>
       <span class="grad"></span><span class="label">TCU / Gearbox Tuning</span><span class="chip">View more</span>
     </a>
     <a class="tile-card" href="about.html">
-      <img alt="Workshop &amp; events" class="rounded" src="assets/Car Stage 2.jpg"/>
+      <img alt="Workshop &amp; events" class="rounded" src="assets/Car Stage 2.jpg" loading="lazy"/>
       <span class="grad"></span><span class="label">About DT Tuning</span><span class="chip">Learn</span>
     </a>
   </div>
@@ -92,7 +92,7 @@
 
 <section class="container mid-banner">
   <div class="carbon"></div>
-  <img alt="Dyno banner" class="rounded" src="assets/mclaren_dyno.jpg"/>
+  <img alt="Dyno banner" class="rounded" src="assets/mclaren_dyno.jpg" loading="lazy"/>
   <div class="copy">
     <h2 class="h2">Check your BHP gains</h2>
     <p class="sub">Enter your reg or select your vehicle to see estimated power/torque gains.</p>
@@ -135,14 +135,19 @@
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');
 
+// Open/close menu, manage overlay state + aria-expanded
 burger.addEventListener('click', () => {
+  const expanded = burger.getAttribute('aria-expanded') === 'true';
+  burger.setAttribute('aria-expanded', String(!expanded));
   burger.classList.toggle('active');
   nav.classList.toggle('active');
   document.body.classList.toggle('menu-open');
 });
 
+// Close menu after navigating
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => {
+    burger.setAttribute('aria-expanded', 'false');
     burger.classList.remove('active');
     nav.classList.remove('active');
     document.body.classList.remove('menu-open');
