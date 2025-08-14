@@ -23,10 +23,10 @@
       <a href="contact.html">Contact Us</a>
     </nav>
     <button class="burger" aria-label="Toggle menu">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <div class="cta">
       <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
         <img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle"/>
@@ -38,7 +38,9 @@
     </div>
   </div>
 </header>
-<div class="cta header-cta">
+
+<!-- ⬇ Mobile-only quick actions (hidden on desktop via CSS) -->
+<div class="cta header-cta mobile-only">
   <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
     <img alt="Call" src="assets/Phone.png"/>
   </a>
@@ -47,6 +49,7 @@
   </a>
   <a class="btn btn-primary" href="book.html">Book Now</a>
 </div>
+
 <section class="section">
   <div class="container">
     <h1 class="h2">Vehicle Remapping</h1>
@@ -94,15 +97,11 @@
         <h3>Check your BHP gains</h3>
         <p>Enter your reg or select your vehicle to see estimated power/torque gains.</p>
 
-        <!-- Embed the Bensky widget right inside this container -->
         <div class="api-box" id="vehicle-check">
-          <!-- Bensky API (as provided) -->
           <script src="https://portal.bensky.co.uk/w.php?id=1495&js=1"></script>
         </div>
 
-        <!-- Proceed button will be injected here when results appear -->
         <div id="proceed-wrap"></div>
-
       </div>
     </div>
   </div>
@@ -135,13 +134,12 @@
     });
   });
 
-  // When the Bensky widget injects content, add a "Proceed to Booking" button under it
+  // Add "Proceed to Booking" after widget renders
   (function(){
     const target = document.getElementById('vehicle-check');
     if (!target) return;
 
     const addProceedBtn = () => {
-      // Avoid duplicates
       if (document.getElementById('proceed-booking')) return;
       const wrap = document.getElementById('proceed-wrap');
       const btn = document.createElement('a');
@@ -154,7 +152,6 @@
       wrap.appendChild(btn);
     };
 
-    // Observe for any child nodes added by the widget
     const obs = new MutationObserver((mutations) => {
       for (const m of mutations) {
         if (m.addedNodes && m.addedNodes.length) {
@@ -165,32 +162,31 @@
     });
     obs.observe(target, { childList: true, subtree: true });
 
-    // Fallback: add button after a short delay in case widget renders asynchronously
     setTimeout(addProceedBtn, 4000);
   })();
+
+  // Mobile burger menu
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('.nav-links');
+
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
+    nav.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('active');
+      nav.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    });
+  });
 </script>
 
 <div class="fab-dock">
   <a href="tel:+447782298093" aria-label="Call"><img src="assets/Phone.png" alt="Call"></a>
   <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/Whatsapp.png" alt="WhatsApp"></a>
 </div>
-<script>
-const burger = document.querySelector('.burger');
-const nav = document.querySelector('.nav-links');
-
-burger.addEventListener('click', () => {
-  burger.classList.toggle('active');
-  nav.classList.toggle('active');
-  document.body.classList.toggle('menu-open');
-});
-
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    burger.classList.remove('active');
-    nav.classList.remove('active');
-    document.body.classList.remove('menu-open');
-  });
-});
-</script>
 </body>
 </html>

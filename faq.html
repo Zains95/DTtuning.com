@@ -25,10 +25,10 @@
       <a href="contact.html">Contact Us</a>
     </nav>
     <button class="burger" aria-label="Toggle menu">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <div class="cta">
       <a class="btn btn-ghost" href="tel:+447782298093" title="Call us"><img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle"/></a>
       <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp"><img alt="WhatsApp" src="assets/Whatsapp.png" style="height:44px;width:44px;vertical-align:middle"/></a>
@@ -39,23 +39,24 @@
 
 <!-- Hero Banner -->
 <section class="hero-banner carbon">
-  <!-- Add image -->
   <img alt="FAQ banner" class="rounded" src="assets/Audi S5 Wheels.jpg"/>
   <div class="hero-content container">
     <h1>Frequently Asked Questions</h1>
     <p>Everything you need to know about remapping, tuning, and our services.</p>
   </div>
 
-  <div class="cta header-cta">
-  <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
-    <img alt="Call" src="assets/Phone.png"/>
-  </a>
-  <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp">
-    <img alt="WhatsApp" src="assets/Whatsapp.png"/>
-  </a>
-  <a class="btn btn-primary" href="book.html">Book Now</a>
-</div>
-
+  <!-- ✅ Standardised hero CTA for mobile -->
+  <div class="hero-cta" aria-label="Quick actions">
+    <div class="icon-row">
+      <a href="tel:+447782298093" aria-label="Call">
+        <img src="assets/Phone.png" alt="Call">
+      </a>
+      <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <img src="assets/Whatsapp.png" alt="WhatsApp">
+      </a>
+    </div>
+    <a class="hero-book" href="book.html">Book Now</a>
+  </div>
 </section>
 
 <!-- FAQ Section -->
@@ -99,27 +100,21 @@
     <p class="sub">Deep dives from our calibration team — click a topic to read more.</p>
 
     <div class="blog-grid">
-      <!-- Blog card 1 -->
       <article class="card blog">
-        <!-- Add image -->
         <img class="rounded" src="assets/Fuel Eco Stage 1.jpg" alt="Add image — ECU remapping benefits"/>
         <h3><a href="blog-ecu-remapping.html">Top 7 Benefits of ECU Remapping</a></h3>
         <p>How a Stage 1 remap boosts torque, drivability and confidence — while staying within safe limits.</p>
         <p><a class="btn btn-primary" href="blog-ecu-remapping.html">Read More</a></p>
       </article>
 
-      <!-- Blog card 2 -->
       <article class="card blog">
-        <!-- Add image -->
         <img class="rounded" src="assets/Remap.jpg" alt="Add image — Diesel DPF care"/>
         <h3><a href="blog-dpf-cleaning.html">Diesel Economy Maps & DPF Care</a></h3>
         <p>Real-world MPG, how economy maps work, and simple habits to keep your DPF healthy.</p>
         <p><a class="btn btn-primary" href="blog-dpf-cleaning.html">Read More</a></p>
       </article>
 
-      <!-- Blog card 3 -->
       <article class="card blog">
-        <!-- Add image -->
         <img class="rounded" src="assets/Stage 3 car.jpg" alt="Add image — TCU tuning explained"/>
         <h3><a href="blog-tcu-tuning.html">TCU Tuning Explained</a></h3>
         <p>What gearbox maps change, when to pair them with Stage 1–3, and the drivability gains.</p>
@@ -133,12 +128,12 @@
 <footer class="carbon">
   <div class="container foot">
     <div>
-      <strong>DT Tuning &amp; Development</strong><br/>
-      <small>Based in London, United Kingdom — Serving the UK &amp; Worldwide</small><br/><br/>
+      <strong>DT Tuning & Development</strong><br/>
+      <small>Based in London, United Kingdom — Serving the UK & Worldwide</small><br/><br/>
       <small>Email: info@dttuning.com  |  Phone: 07782 298093</small>
     </div>
     <div>
-      <small>© <span id="y"></span> DT Tuning &amp; Development Ltd. All rights reserved.</small><br/>
+      <small>© <span id="y"></span> DT Tuning & Development Ltd. All rights reserved.</small><br/>
       <small><a href="#">Privacy</a> · <a href="#">Terms</a></small>
     </div>
   </div>
@@ -147,9 +142,10 @@
 
 <!-- Floating buttons -->
 <div class="fab-dock">
-  <a href="tel:+447782298093" aria-label="Call"><img src="assets/Phone.PNG" alt="Call"></a>
-  <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/Whatsapp.PNG" alt="WhatsApp"></a>
+  <a href="tel:+447782298093" aria-label="Call"><img src="assets/Phone.png" alt="Call"></a>
+  <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/Whatsapp.png" alt="WhatsApp"></a>
 </div>
+
 <script>
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');

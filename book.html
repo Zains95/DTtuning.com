@@ -5,14 +5,14 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Book a Remap — DT Tuning</title>
 <meta content="Book your remap and check expected gains." name="description"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
 <link href="assets/styles.css" rel="stylesheet"/>
 </head>
 <body>
 <header class="carbon">
   <div class="container nav">
     <div class="brand">
-      <img alt="DT Tuning &amp; Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&amp;url=%2Flogo.png&amp;w=640"/>
+      <img alt="DT Tuning &amp; Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&url=%2Flogo.png&w=640"/>
     </div>
     <nav class="nav-links">
       <a href="index.html">Home</a>
@@ -23,10 +23,10 @@
       <a href="contact.html">Contact Us</a>
     </nav>
     <button class="burger" aria-label="Toggle menu">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <div class="cta">
       <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
         <img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle"/>
@@ -47,16 +47,19 @@
     <p class="sub">Use the vehicle checker to find gains, then request a booking slot.</p>
   </div>
 
-  <div class="cta header-cta">
-  <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
-    <img alt="Call" src="assets/Phone.png"/>
-  </a>
-  <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp">
-    <img alt="WhatsApp" src="assets/Whatsapp.png"/>
-  </a>
-  <a class="btn btn-primary" href="book.html">Book Now</a>
-</div>
-
+  <!-- ✅ Standard mobile quick-actions used sitewide -->
+  <div class="hero-cta" aria-label="Quick actions">
+    <div class="icon-row">
+      <a href="tel:+447782298093" aria-label="Call">
+        <img src="assets/Phone.png" alt="Call">
+      </a>
+      <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <img src="assets/Whatsapp.png" alt="WhatsApp">
+      </a>
+    </div>
+    <a class="hero-book" href="book.html">Book Now</a>
+  </div>
+  <!-- ✅ End mobile quick-actions -->
 </section>
 
 <!-- CONTENT UNDER HERO (API + info) -->
@@ -96,6 +99,7 @@
   <a href="tel:+447782298093" aria-label="Call"><img src="assets/Phone.png" alt="Call"></a>
   <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/Whatsapp.png" alt="WhatsApp"></a>
 </div>
+
 <script>
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');

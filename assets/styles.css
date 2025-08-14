@@ -1,4 +1,3 @@
-
 :root{
   --brand:#ffcc00;
   --brand-dark:#e6b800;
@@ -28,7 +27,7 @@ img.rounded{border-radius:var(--radius)}
   background-position:0 0, 0 8px, 8px -8px, -8px 0;
 }
 
-/* Header (alignment tweaks) */
+/* Header */
 header{position:sticky;top:0;background:#0c0d11d9;backdrop-filter:saturate(1.2) blur(8px);z-index:50;border-bottom:1px solid rgba(255,255,255,.06)}
 .nav{display:flex;align-items:center;gap:28px;justify-content:space-between;height:110px}
 .brand{display:flex;align-items:center;gap:14px}
@@ -41,15 +40,20 @@ header{position:sticky;top:0;background:#0c0d11d9;backdrop-filter:saturate(1.2) 
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;font-weight:800;letter-spacing:.2px}
 .btn-primary{background:var(--brand);color:#050504}
 .btn-primary:hover{background:var(--brand-dark)}
-.btn-ghost{border:1px solid rgba(232, 240, 8, 0.121);color:#f8fafc;background:var}
-.btn-ghost:hover{background:rgba(245, 237, 5, 0.06)}
-.hero-banner .btn-ghost {
-  border: none; /* remove border if you want it cleaner */
-  color: #050504; /* dark text for readability */
-  background: var(--brand);}
-.hero-banner .btn-ghost:hover {background: var(--brand-dark);}
 
-/* Home */
+/* Fix: ghost button base style (transparent) */
+.btn-ghost{border:1px solid rgba(232,240,8,0.121);color:#f8fafc;background:transparent}
+.btn-ghost:hover{background:rgba(245,237,5,0.06)}
+
+/* Make ONLY hero ghost buttons look like primary (yellow) */
+.hero-banner .btn-ghost {
+  border: none;
+  color: #050504;
+  background: var(--brand);
+}
+.hero-banner .btn-ghost:hover { background: var(--brand-dark); }
+
+/* Home / hero */
 .hero-banner{position:relative;min-height:62vh;display:grid;place-items:center;overflow:hidden;border-radius:var(--radius)}
 .hero-banner::before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;background:radial-gradient(1200px 600px at 50% -20%, rgba(255,204,0,.25), transparent 60%)}
 .hero-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.05) brightness(.6) saturate(1.1)}
@@ -57,6 +61,7 @@ header{position:sticky;top:0;background:#0c0d11d9;backdrop-filter:saturate(1.2) 
 .hero-content h1{font-size:clamp(30px,4vw,56px);line-height:1.05;margin:0 0 12px;text-shadow:0 2px 20px rgba(0,0,0,.5)}
 .hero-content p{max-width:900px;margin:0 auto 18px;color:#cbd5e1}
 .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
 .sections{padding:24px 0}
 .tile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .tile-lg{grid-column:span 2}
@@ -64,7 +69,7 @@ header{position:sticky;top:0;background:#0c0d11d9;backdrop-filter:saturate(1.2) 
 .tile-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.1) brightness(.78)}
 .tile-card .grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.82))}
 .tile-card .label{position:absolute;left:16px;bottom:16px;font-weight:900;font-size:18px;letter-spacing:.3px}
-.tile-card .chip{position:absolute;right:14px;bottom:14px;background:var(--brand);color:#111;padding:8px 10px;border-radius:999px;font-weight:800;font-size:14px;box-shadow:0 6px 16px rgba(255,204,0,.25)}
+.tile-card .chip{position:absolute;right:14px;bottom:14px;background:var(--brand);color:var(--tile);padding:8px 10px;border-radius:999px;font-weight:800;font-size:14px;box-shadow:0 6px 16px rgba(255,204,0,.25)}
 @media (max-width:1100px){.tile-grid{grid-template-columns:repeat(2,1fr)}.tile-lg{grid-column:span 2}}
 @media (max-width:640px){.tile-grid{grid-template-columns:1fr}}
 .mid-banner{position:relative;margin:22px 0;border-radius:var(--radius);overflow:hidden;min-height:260px}
@@ -110,143 +115,147 @@ label{display:block;font-weight:700;margin-bottom:6px;color:#fff}
 .success{border:1px solid rgba(34,197,94,.4);background:#052e1a;color:#d1fae5;padding:12px;border-radius:10px;margin-bottom:12px;display:none}
 .error{border:1px solid rgba(239,68,68,.4);background:#3a0d0d;color:#fee2e2;padding:12px;border-radius:10px;margin-bottom:12px;display:none}
 
-/* --- surgical override: icon sizes & floating dock --- */
+/* Floating dock */
 .icon-btn, .header .icon-btn{width:56px;height:56px;border-radius:50%}
 .icon-btn img{width:26px;height:26px}
 .fab-dock{position:fixed;right:18px;bottom:18px;display:flex;gap:12px;z-index:9999}
 .fab-dock a{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:#ffcc0000;border:1px solid rgba(0,0,0,.2);box-shadow:0 6px 18px rgba(0,0,0,.3)}
 .fab-dock a img{width:55px;height:55px}
 @media (max-width:520px){.fab-dock{right:12px;bottom:12px}}
-/* Contact page only — wider form + align with hero image */
-.contact-page .tile-grid {
-  display: block; /* remove grid layout */}
-.contact-page .form-wrap {
-  max-width: 1100px; /* matches hero image width */
-  margin: 0 auto;    /* center form */
-  padding: 28px;     /* more breathing space inside form */}
-.contact-page .container {
-  max-width: 1280px; /* allow more horizontal room overall */}
-.contact-page .h1,
-.contact-page .sub {
-  text-align: center; /* center title and subtitle */}
-.contact-page .form-grid {
-  grid-template-columns: 1fr 1fr; /* keep two-column layout on desktop */}
-@media (max-width: 768px) {
-  .contact-page .form-grid {
-    grid-template-columns: 1fr; /* stack on mobile */}}
-    /* Contact page only — pan the Audi S5 hero image down and show more of the car */
-.contact-page .hero-banner { 
-  min-height: 70vh;             /* a bit taller so more is visible */}
 
-.contact-page .hero-banner img {
-  object-position: 70% 68%;     /* X%, Y% — move the crop window down */}
+/* Contact page (wider form) */
+.contact-page .tile-grid { display:block; }
+.contact-page .form-wrap { max-width:1100px; margin:0 auto; padding:28px; }
+.contact-page .container { max-width:1280px; }
+.contact-page .h1, .contact-page .sub { text-align:center; }
+.contact-page .form-grid { grid-template-columns:1fr 1fr; }
+@media (max-width:768px){ .contact-page .form-grid { grid-template-columns:1fr; } }
+.contact-page .hero-banner { min-height:70vh; }
+.contact-page .hero-banner img { object-position:70% 68%; }
+@media (max-width:778px){
+  .contact-page .hero-banner { min-height:50vh; }
+  .contact-page .hero-banner img { object-position:70% 68%; }
+}
 
-/* Optional: fine-tune for small screens */
-@media (max-width: 778px) {.contact-page .hero-banner { min-height: 50vh; }
-  .contact-page .hero-banner img { object-position:70%68%;}}
-/* Book Now page — center the hero image and control height */
-.booknow-banner {min-height: 62vh;}
+/* Book Now page */
+.booknow-banner { min-height:62vh; }
+.booknow-banner img { object-fit:cover; object-position:center 70%; }
+@media (max-width:768px){
+  .booknow-banner { min-height:56vh; }
+  .booknow-banner img { object-position:50% 60%; }
+}
 
-.booknow-banner img {object-position: 50% 50%; /* centered horizontally & vertically */}
+/* FAQ hero */
+.faq-hero { min-height:62vh; }
+.faq-hero img{
+  object-fit:cover;
+  object-position:24% center;
+  filter:grayscale(.04) brightness(.72) saturate(1.05);
+}
+@media (max-width:900px){ .faq-hero { min-height:54vh; } .faq-hero img{ object-position:30% center; } }
+@media (max-width:560px){ .faq-hero { min-height:48vh; } .faq-hero img{ object-position:34% center; } }
 
-/* Fine-tune on mobile if needed */
-@media (max-width: 768px) {.booknow-banner { min-height: 56vh;}
-  .booknow-banner img { object-position:50%60%;}}
-  /* Adjust Book Now hero image crop */
-.booknow-banner img {object-fit: cover;
-  object-position: center 70%;}
-/* ===== FAQ hero focus (show more wheel & badge) ===== */
-.faq-hero { min-height: 62vh; }
-.faq-hero img{object-fit: cover;
-  /* Focus towards the left where the wheel & badge are */
-  object-position: 24% center; /* tweak 20–30% to taste */
-  filter: grayscale(.04) brightness(.72) saturate(1.05); /* same vibe */}
-
-/* Tweak for smaller screens (push focus a bit more to the wheel) */
-@media (max-width: 900px){.faq-hero { min-height: 54vh; }
-  .faq-hero img{ object-position: 30% center; }}
-
-@media (max-width: 560px){.faq-hero { min-height: 48vh; }
-  .faq-hero img{ object-position: 34% center; }}
 /* Burger menu button (hidden on desktop) */
 .burger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 1001;
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  z-index:1001;
 }
 .burger span {
-  width: 26px;
-  height: 3px;
-  background: #fff;
-  border-radius: 2px;
-  transition: all 0.3s ease;
+  width:26px; height:3px; background:#fff; border-radius:2px; transition:all .3s ease;
 }
 
-/* Show burger only on mobile */
-@media (max-width: 980px) {
-  .burger { display: flex; }
+/* ===== Mobile nav: drop-down style ===== */
+@media (max-width:980px){
+  .burger { display:flex; }
+  .nav { gap:12px; }
 
-  /* Hide nav-links initially on mobile */
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    height: 100%;
-    width: 240px;
-    background: rgba(0,0,0,0.95);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 80px 20px;
-    gap: 18px;
-    transition: right 0.3s ease;
-    z-index: 1000;
+  .nav-links{
+    position:fixed;
+    top:-100%;            /* hidden above viewport */
+    left:0;
+    right:0;
+    width:100%;
+    height:auto;
+    max-height:80vh;      /* scroll if tall */
+    overflow:auto;
+    background:rgba(0,0,0,0.95);
+    flex-direction:column;
+    align-items:flex-start;
+    padding:80px 20px;    /* space for header area */
+    gap:18px;
+    transition:top .3s ease;  /* animate downward */
+    z-index:1000;
+  }
+  .nav-links.active{ top:0; }
+
+  /* dim background when menu opens */
+  body.menu-open::before{
+    content:"";
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:999;
   }
 
-  /* Show nav when active */
-  .nav-links.active {
-    right: 0;
-  }
+  /* bigger tap targets on mobile menu */
+  .nav-links a{ width:100%; padding:14px 6px; border-radius:8px; }
 
-  /* Fade overlay */
-  body.menu-open::before {content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 999;}
-
-  /* Burger animate to X */
-  .burger.active span:nth-child(1) {transform: rotate(45deg) translate(5px, 5px);}
-  .burger.active span:nth-child(2) {opacity: 0;}
-  .burger.active span:nth-child(3) {transform: rotate(-45deg) translate(6px, -6px);}}
-  /* Adjust CTA icons and Book Now for better mobile layout */
-.header-cta img {
-  height: 44px;
-  width: 44px;
-  vertical-align: middle;
+  /* burger -> X */
+  .burger.active span:nth-child(1){ transform:rotate(45deg) translate(5px,5px); }
+  .burger.active span:nth-child(2){ opacity:0; }
+  .burger.active span:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px); }
 }
 
-/* On mobile: scale down & move inside banner neatly */
-@media (max-width: 980px) {
-  .header-cta {
-    position: absolute;
-    bottom: 12px; /* sit at bottom of banner */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    background: rgba(0,0,0,0.5);
-    padding: 6px 10px;
-    border-radius: 10px;
-    z-index: 51;
+/* Header CTA tweak target (if you re-use it) */
+.header-cta img{ height:44px; width:44px; vertical-align:middle; }
+@media (max-width:980px){
+  .header-cta{
+    position:absolute; bottom:12px; left:50%; transform:translateX(-50%);
+    display:flex; gap:8px; background:rgba(0,0,0,.5);
+    padding:6px 10px; border-radius:10px; z-index:51;
   }
-  .header-cta img {
-    height: 32px;
-    width: 32px;
+  .header-cta img{ height:32px; width:32px; }
+  .header-cta .btn-primary{ padding:8px 12px; font-size:14px; }
+}
+
+/* ===== Mobile quick actions inside hero ===== */
+.hero-cta{ display:none; } /* hidden on desktop */
+
+@media (max-width:980px){
+  /* avoid duplicate header CTAs */
+  header .cta{ display:none; }
+
+  /* ensure hero can position absolute children */
+  .hero-banner, .booknow-banner{ position:relative; }
+
+  .hero-cta{
+    position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    width:calc(100% - 24px); max-width:560px; z-index:51;
   }
-  .header-cta .btn-primary {
-    padding: 8px 12px;
-    font-size: 14px;}}
+  .hero-cta .icon-row{
+    display:flex; gap:10px; background:rgba(0,0,0,.5);
+    padding:6px 10px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  .hero-cta .icon-row a{
+    width:44px; height:44px; display:grid; place-items:center;
+    border-radius:10px; background:rgba(0,0,0,.25);
+    border:1px solid rgba(255,255,255,.12);
+  }
+  .hero-cta .icon-row img{ width:24px; height:24px; display:block; }
+
+  .hero-cta .hero-book{
+    display:block; width:100%; text-align:center;
+    padding:12px 16px; border-radius:12px; font-weight:800; letter-spacing:.2px;
+    background:var(--brand); color:#050504; border:none;
+    box-shadow:0 6px 18px rgba(255,204,0,.25);
+  }
+  .hero-cta .hero-book:hover{ background:var(--brand-dark); }}
+  /* Show this strip only on mobile (fixes remaps.html duplication on desktop) */
+@media (min-width: 981px){
+  .mobile-only { display: none !important; }}

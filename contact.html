@@ -4,15 +4,15 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Contact Us — DT Tuning</title>
-<meta content="Contact DT Tuning &amp; Development." name="description"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<meta content="Contact DT Tuning & Development." name="description"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
 <link href="assets/styles.css" rel="stylesheet"/>
 </head>
 <body class="contact-page">
 <header class="carbon">
 <div class="container nav">
 <div class="brand">
-<img alt="DT Tuning &amp; Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&amp;url=%2Flogo.png&amp;w=640"/>
+<img alt="DT Tuning & Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&url=%2Flogo.png&w=640"/>
 </div>
 <nav class="nav-links">
 <a href="index.html">Home</a>
@@ -28,31 +28,35 @@
   <span></span>
 </button>
 <div class="cta">
-<a class="btn btn-ghost" href="tel:‪+447782298093‬" title="Call us"><img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle"/></a>
+<a class="btn btn-ghost" href="tel:+447782298093" title="Call us"><img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle"/></a>
 <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp"><img alt="WhatsApp" src="assets/Whatsapp.png" style="height:44px;width:44px;vertical-align:middle"/></a>
 <a class="btn btn-primary" href="book.html">Book Now</a>
 </div>
 </div>
 </header>
+
 <section class="hero-banner carbon">
 <img alt="Audi S5 Front" class="rounded" src="assets/S5 Front.jpg"/>
 <div class="hero-content container">
-<h1>Get in touch to get started now! — File Services &amp; Remapping Services</h1>
+<h1>Get in touch to get started now! — File Services & Remapping Services</h1>
 <p>High-quality, custom-developed tuning files from experienced in-house technicians. ECU/TCU remaps, DPF/EGR/AdBlue solutions, and training — UK based, serving worldwide.</p>
-<div class="hero-actions"></div>
 </div>
 
-<div class="cta header-cta">
-  <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
-    <img alt="Call" src="assets/Phone.png"/>
-  </a>
-  <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp">
-    <img alt="WhatsApp" src="assets/Whatsapp.png"/>
-  </a>
-  <a class="btn btn-primary" href="book.html">Book Now</a>
+<!-- ✅ Consistent mobile quick actions -->
+<div class="hero-cta" aria-label="Quick actions">
+  <div class="icon-row">
+    <a href="tel:+447782298093" aria-label="Call">
+      <img src="assets/Phone.png" alt="Call">
+    </a>
+    <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <img src="assets/Whatsapp.png" alt="WhatsApp">
+    </a>
+  </div>
+  <a class="hero-book" href="book.html">Book Now</a>
 </div>
-
+<!-- ✅ End quick actions -->
 </section>
+
 <section class="sections">
 <div class="container tile-grid">
 <h1 class="h1">Contact Us</h1>
@@ -68,7 +72,7 @@
 <div class="form-grid">
 <div>
 <label for="name">Full name</label>
-<input class="input" id="name" name="name" placeholder="Your name" required="" type="text"/>
+<input class="input" id="name" name="name" placeholder="Your name" required type="text"/>
 </div>
 <div>
 <label for="phone">Phone</label>
@@ -76,15 +80,15 @@
 </div>
 <div>
 <label for="email">Email</label>
-<input class="input" id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+<input class="input" id="email" name="email" placeholder="you@example.com" required type="email"/>
 </div>
 <div>
 <label for="subject">Subject</label>
-<input class="input" id="subject" name="subject" placeholder="What’s this about?" required="" type="text"/>
+<input class="input" id="subject" name="subject" placeholder="What’s this about?" required type="text"/>
 </div>
 <div class="full">
 <label for="message">Message</label>
-<textarea class="textarea" id="message" name="message" placeholder="Tell us what you need…" required=""></textarea>
+<textarea class="textarea" id="message" name="message" placeholder="Tell us what you need…" required></textarea>
 </div>
 </div>
 <div class="form-actions">
@@ -94,6 +98,7 @@
 </form>
 </div>
 </section>
+
 <script src="assets/contact.js"></script>
 <script>
 function validateForm(e){
@@ -104,24 +109,27 @@ function validateForm(e){
   return true;
 }
 </script>
+
 <footer class="carbon">
 <div class="container foot">
 <div>
-<strong>DT Tuning &amp; Development</strong><br/>
-<small>Based in London, United Kingdom — Serving the UK &amp; Worldwide</small><br/><br/>
+<strong>DT Tuning & Development</strong><br/>
+<small>Based in London, United Kingdom — Serving the UK & Worldwide</small><br/><br/>
 <small>Email: info@dttuning.com  |  Phone: 07782 298093</small>
 </div>
 <div>
-<small>© <span id="y"></span> DT Tuning &amp; Development Ltd. All rights reserved.</small><br/>
+<small>© <span id="y"></span> DT Tuning & Development Ltd. All rights reserved.</small><br/>
 <small><a href="#">Privacy</a> · <a href="#">Terms</a></small>
 </div>
 </div>
 </footer>
 <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+
 <div class="fab-dock">
 <a href="tel:+447782298093" aria-label="Call"><img src="assets/Phone.png" alt="Call"></a>
 <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/Whatsapp.png" alt="WhatsApp"></a>
 </div>
+
 <script>
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');
