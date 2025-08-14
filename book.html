@@ -48,17 +48,59 @@
   </div>
 
   <!-- ✅ Mobile-only quick-actions (hidden on desktop via CSS .mobile-only) -->
-  <div class="mobile-only hero-cta" aria-label="Quick actions">
-    <div class="icon-row">
-      <a href="tel:+447782298093" aria-label="Call">
-        <img src="assets/Phone.png" alt="Call">
-      </a>
-      <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <img src="assets/Whatsapp.png" alt="WhatsApp">
-      </a>
-    </div>
-    <a class="hero-book" href="book.html">Book Now</a>
-  </div>
+<script>
+(function(){
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('.nav-links');
+
+  if (!burger || !nav) return;
+
+  const openMenu = () => {
+    burger.classList.add('active');
+    nav.classList.add('active');
+    document.body.classList.add('menu-open');
+  };
+
+  const closeMenu = () => {
+    burger.classList.remove('active');
+    nav.classList.remove('active');
+    document.body.classList.remove('menu-open');
+  };
+
+  // ✅ Make sure menu is CLOSED on load (handles iOS bfcache too)
+  closeMenu();
+  window.addEventListener('pageshow', closeMenu);
+
+  // Toggle on burger tap
+  burger.addEventListener('click', (e) => {
+    e.preventDefault();
+    const isOpen = nav.classList.contains('active');
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  // ✅ Intercept mobile nav link taps: close first, then navigate
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', (e) => {
+      if (window.matchMedia('(max-width: 980px)').matches) {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        closeMenu();
+        setTimeout(() => { window.location.href = href; }, 150);
+      }
+    });
+  });
+
+  // Close if the viewport becomes desktop size
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980) closeMenu();
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
+</script>
   <!-- ✅ End mobile quick-actions -->
 </section>
 

@@ -46,20 +46,14 @@ header{position:sticky;top:0;background:#0c0d11d9;backdrop-filter:saturate(1.2) 
 .btn-ghost:hover{background:rgba(245,237,5,0.06)}
 
 /* Make ONLY hero ghost buttons look like primary (yellow) */
-.hero-banner .btn-ghost {
-  border: none;
-  color: #050504;
-  background: var(--brand);
-}
+.hero-banner .btn-ghost { border:none; color:#050504; background:var(--brand); }
 .hero-banner .btn-ghost:hover { background: var(--brand-dark); }
 
 /* Home / hero */
 .hero-banner{position:relative;min-height:62vh;display:grid;place-items:center;overflow:hidden;border-radius:var(--radius)}
 .hero-banner::before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;background:radial-gradient(1200px 600px at 50% -20%, rgba(255,204,0,.25), transparent 60%)}
-
-/* ✅ Critical fix: only style the hero's direct background image */
+/* ✅ Only target the hero’s BACKGROUND image, not icons inside */
 .hero-banner > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.05) brightness(.6) saturate(1.1)}
-
 .hero-content{position:relative;text-align:center;color:#fff;padding:24px}
 .hero-content h1{font-size:clamp(30px,4vw,56px);line-height:1.05;margin:0 0 12px;text-shadow:0 2px 20px rgba(0,0,0,.5)}
 .hero-content p{max-width:900px;margin:0 auto 18px;color:#cbd5e1}
@@ -135,7 +129,7 @@ label{display:block;font-weight:700;margin-bottom:6px;color:#fff}
 .contact-page .form-grid { grid-template-columns:1fr 1fr; }
 @media (max-width:768px){ .contact-page .form-grid { grid-template-columns:1fr; } }
 .contact-page .hero-banner { min-height:70vh; }
-/* The hero image on contact page is the direct child as well */
+/* Direct child only to avoid icon blow-ups */
 .contact-page .hero-banner > img { object-position:70% 68%; }
 @media (max-width:778px){
   .contact-page .hero-banner { min-height:50vh; }
@@ -144,7 +138,6 @@ label{display:block;font-weight:700;margin-bottom:6px;color:#fff}
 
 /* Book Now page */
 .booknow-banner { min-height:62vh; }
-/* ✅ Critical fix: direct child only */
 .booknow-banner > img { object-fit:cover; object-position:center 70%; }
 @media (max-width:768px){
   .booknow-banner { min-height:56vh; }
@@ -152,7 +145,6 @@ label{display:block;font-weight:700;margin-bottom:6px;color:#fff}
 }
 
 /* FAQ hero */
-/* ✅ Critical fix: direct child only */
 .faq-hero { min-height:62vh; }
 .faq-hero > img{
   object-fit:cover;
@@ -183,22 +175,26 @@ label{display:block;font-weight:700;margin-bottom:6px;color:#fff}
 
   .nav-links{
     position:fixed;
-    top:-100%;            /* hidden above viewport */
-    left:0;
-    right:0;
+    top:-100%;               /* start CLOSED above viewport */
+    left:0; right:0;
     width:100%;
     height:auto;
-    max-height:80vh;      /* scroll if tall */
+    max-height:80vh;
     overflow:auto;
     background:rgba(0,0,0,0.95);
     flex-direction:column;
     align-items:flex-start;
-    padding:80px 20px;    /* space for header area */
+    padding:80px 20px;
     gap:18px;
-    transition:top .3s ease;  /* animate downward */
+    transition:top .3s ease; /* slide down */
     z-index:1000;
   }
-  .nav-links.active{ top:0; }
+  .nav-links.active{ top:0; }  /* open → drop downward */
+
+  /* ✨ Prevent “stuck/dim” state and weird overlaps */
+  body.menu-open{ overflow:hidden; }                 /* stop background scroll */
+  body.menu-open .fab-dock{ display:none !important; }  /* hide floating buttons */
+  body.menu-open .header-cta{ display:none !important; }/* hide hero quick-CTA if present */
 
   /* dim background when menu opens */
   body.menu-open::before{
@@ -255,7 +251,6 @@ label{display:block;font-weight:700;margin-bottom:6px;color:#fff}
     border:1px solid rgba(255,255,255,.12);
   }
   .hero-cta .icon-row img{ width:24px; height:24px; display:block; }
-
   .hero-cta .hero-book{
     display:block; width:100%; text-align:center;
     padding:12px 16px; border-radius:12px; font-weight:800; letter-spacing:.2px;
