@@ -14,7 +14,9 @@
     <div class="brand">
       <img alt="DT Tuning &amp; Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&url=%2Flogo.png&w=640" loading="lazy"/>
     </div>
-    <nav class="nav-links">
+
+    <!-- 👇 Give the nav an id + a11y role/label -->
+    <nav class="nav-links" id="primary-navigation" role="navigation" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="service.html">File Service</a>
       <a href="remaps.html">Remaps</a>
@@ -22,11 +24,15 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact Us</a>
     </nav>
-    <button class="burger" aria-label="Toggle menu" aria-expanded="false">
+
+    <!-- 👇 Hook button to nav with aria-controls -->
+    <button class="burger" aria-label="Toggle menu" aria-controls="primary-navigation" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
+
+    <!-- Book Now stays at the far right on desktop per CSS -->
     <div class="cta">
       <a class="btn btn-ghost" href="tel:+447782298093" title="Call us"><img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle" loading="lazy"/></a>
       <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp"><img alt="WhatsApp" src="assets/Whatsapp.png" style="height:44px;width:44px;vertical-align:middle" loading="lazy"/></a>
@@ -45,7 +51,6 @@
       <a class="btn btn-ghost" href="remaps.html">Book a Vehicle Remap</a>
     </div>
   </div>
-  <!-- (removed duplicate inline menu script here) -->
 </section>
 
 <section class="sections">
@@ -118,25 +123,44 @@
   <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/Whatsapp.png" alt="WhatsApp"></a>
 </div>
 
-<!-- ✅ Single, robust mobile menu controller -->
+<!-- ✅ Single, robust mobile menu controller with real overlay -->
 <script>
 (function(){
   const burger = document.querySelector('.burger');
-  const nav    = document.querySelector('.nav-links');
+  const nav    = document.querySelector('#primary-navigation');
   if (!burger || !nav) return;
 
-  const openMenu = () => {
+  let overlay = null;
+
+  function buildOverlay(){
+    const el = document.createElement('div');
+    el.setAttribute('data-menu-overlay','');
+    Object.assign(el.style, {
+      position:'fixed',
+      inset:'0',
+      background:'rgba(0,0,0,.6)',
+      zIndex:'999'
+    });
+    el.addEventListener('click', closeMenu);
+    return el;
+  }
+
+  function openMenu(){
     burger.classList.add('active');
     burger.setAttribute('aria-expanded','true');
     nav.classList.add('active');
     document.body.classList.add('menu-open');
-  };
-  const closeMenu = () => {
+    if (!overlay) overlay = buildOverlay();
+    if (!document.body.contains(overlay)) document.body.appendChild(overlay);
+  }
+
+  function closeMenu(){
     burger.classList.remove('active');
     burger.setAttribute('aria-expanded','false');
     nav.classList.remove('active');
     document.body.classList.remove('menu-open');
-  };
+    if (overlay && document.body.contains(overlay)) overlay.remove();
+  }
 
   // Ensure closed on load (and when restored from bfcache)
   closeMenu();
@@ -149,7 +173,7 @@
   });
 
   // Close on nav link click (mobile), then navigate
-  document.querySelectorAll('.nav-links a').forEach(a => {
+  document.querySelectorAll('#primary-navigation a').forEach(a => {
     a.addEventListener('click', (e) => {
       if (window.matchMedia('(max-width: 980px)').matches) {
         e.preventDefault();
@@ -158,12 +182,6 @@
         setTimeout(() => { window.location.href = href; }, 120);
       }
     });
-  });
-
-  // Close when clicking outside header/nav (on dim overlay)
-  document.addEventListener('click', (e) => {
-    if (!document.body.classList.contains('menu-open')) return;
-    if (!e.target.closest('header')) closeMenu();
   });
 
   // Close if resizing to desktop

@@ -15,7 +15,8 @@
     <div class="brand">
       <img class="rounded" src="https://www.dttuning.com/_next/image?q=75&url=%2Flogo.png&w=640" alt="DT Tuning & Development Logo"/>
     </div>
-    <nav class="nav-links">
+
+    <nav class="nav-links" id="primary-navigation" role="navigation" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="service.html">File Service</a>
       <a href="remaps.html">Remaps</a>
@@ -23,14 +24,20 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact Us</a>
     </nav>
-    <button class="burger" aria-label="Toggle menu">
+
+    <button class="burger" aria-label="Toggle menu" aria-controls="primary-navigation" aria-expanded="false" type="button">
       <span></span>
       <span></span>
       <span></span>
     </button>
+
     <div class="cta">
-      <a class="btn btn-ghost" href="tel:+447782298093" title="Call us"><img src="assets/Phone.png" alt="Call" style="height:44px;width:44px;vertical-align:middle"/></a>
-      <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp"><img src="assets/Whatsapp.png" alt="WhatsApp" style="height:44px;width:44px;vertical-align:middle"/></a>
+      <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
+        <img src="assets/Phone.png" alt="Call" style="height:44px;width:44px;vertical-align:middle"/>
+      </a>
+      <a class="btn btn-ghost" href="https://wa.me/447782298093" title="Chat on WhatsApp">
+        <img src="assets/Whatsapp.png" alt="WhatsApp" style="height:44px;width:44px;vertical-align:middle"/>
+      </a>
       <a class="btn btn-primary" href="book.html">Book Now</a>
     </div>
   </div>
@@ -102,23 +109,44 @@
 }
 </script>
 
-<!-- ✅ Single, robust mobile menu controller (only script handling the menu) -->
+<!-- ✅ Single, robust mobile menu controller with real overlay -->
 <script>
 (function(){
   const burger = document.querySelector('.burger');
-  const nav = document.querySelector('.nav-links');
+  const nav = document.querySelector('#primary-navigation');
   if (!burger || !nav) return;
 
-  const openMenu = () => {
+  let overlay = null;
+
+  const makeOverlay = () => {
+    const el = document.createElement('div');
+    el.setAttribute('data-menu-overlay','');
+    Object.assign(el.style, {
+      position: 'fixed',
+      inset: '0',
+      background: 'rgba(0,0,0,.6)',
+      zIndex: '999'
+    });
+    el.addEventListener('click', closeMenu);
+    return el;
+  };
+
+  function openMenu(){
     burger.classList.add('active');
     nav.classList.add('active');
     document.body.classList.add('menu-open');
-  };
-  const closeMenu = () => {
+    burger.setAttribute('aria-expanded','true');
+    if (!overlay){ overlay = makeOverlay(); }
+    if (!document.body.contains(overlay)){ document.body.appendChild(overlay); }
+  }
+
+  function closeMenu(){
     burger.classList.remove('active');
     nav.classList.remove('active');
     document.body.classList.remove('menu-open');
-  };
+    burger.setAttribute('aria-expanded','false');
+    if (overlay && document.body.contains(overlay)){ overlay.remove(); }
+  }
 
   // Ensure closed on load and on iOS bfcache restore
   closeMenu();
@@ -131,7 +159,7 @@
   });
 
   // Close first on mobile, then navigate
-  document.querySelectorAll('.nav-links a').forEach(a => {
+  document.querySelectorAll('#primary-navigation a').forEach(a => {
     a.addEventListener('click', (e) => {
       if (window.matchMedia('(max-width: 980px)').matches) {
         e.preventDefault();

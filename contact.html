@@ -14,7 +14,9 @@
     <div class="brand">
       <img alt="DT Tuning & Development Logo" class="rounded" src="https://www.dttuning.com/_next/image?q=75&url=%2Flogo.png&w=640" loading="lazy"/>
     </div>
-    <nav class="nav-links">
+
+    <!-- 👇 Added id + a11y attributes -->
+    <nav class="nav-links" id="primary-navigation" role="navigation" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="service.html">File Service</a>
       <a href="remaps.html">Remaps</a>
@@ -22,11 +24,14 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact Us</a>
     </nav>
-    <button class="burger" aria-label="Toggle menu" aria-expanded="false">
+
+    <!-- 👇 Added aria-controls -->
+    <button class="burger" aria-label="Toggle menu" aria-controls="primary-navigation" aria-expanded="false" type="button">
       <span></span>
       <span></span>
       <span></span>
     </button>
+
     <div class="cta">
       <a class="btn btn-ghost" href="tel:+447782298093" title="Call us">
         <img alt="Call" src="assets/Phone.png" style="height:44px;width:44px;vertical-align:middle" loading="lazy"/>
@@ -45,7 +50,6 @@
     <h1>Get in touch to get started now! — File Services & Remapping Services</h1>
     <p>High-quality, custom-developed tuning files from experienced in-house technicians. ECU/TCU remaps, DPF/EGR/AdBlue solutions, and training — UK based, serving worldwide.</p>
   </div>
-  <!-- (Removed duplicate inline menu script from here) -->
 </section>
 
 <section class="sections">
@@ -70,7 +74,7 @@
         </div>
         <div>
           <label for="phone">Phone</label>
-          <input class="input" id="phone" name="phone" pattern="[0-9+()\\-\\s]{6,}" placeholder="+44 ..." type="tel"/>
+          <input class="input" id="phone" name="phone" pattern="[0-9+()\-\\s]{6,}" placeholder="+44 ..." type="tel"/>
         </div>
         <div>
           <label for="email">Email</label>
@@ -125,38 +129,57 @@ function validateForm(e){
   <a href="https://wa.me/447782298093" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/Whatsapp.png" alt="WhatsApp"></a>
 </div>
 
-<!-- ✅ Single, robust mobile menu controller -->
+<!-- ✅ Single, robust mobile menu controller with real overlay -->
 <script>
 (function(){
   const burger = document.querySelector('.burger');
-  const nav = document.querySelector('.nav-links');
+  const nav = document.querySelector('#primary-navigation');
   if (!burger || !nav) return;
 
-  const openMenu = () => {
+  let overlay = null;
+
+  function createOverlay(){
+    const el = document.createElement('div');
+    el.setAttribute('data-menu-overlay','');
+    Object.assign(el.style, {
+      position:'fixed',
+      inset:'0',
+      background:'rgba(0,0,0,.6)',
+      zIndex:'999'
+    });
+    el.addEventListener('click', closeMenu);
+    return el;
+  }
+
+  function openMenu(){
     burger.classList.add('active');
     burger.setAttribute('aria-expanded','true');
     nav.classList.add('active');
     document.body.classList.add('menu-open');
-  };
-  const closeMenu = () => {
+    if (!overlay) overlay = createOverlay();
+    if (!document.body.contains(overlay)) document.body.appendChild(overlay);
+  }
+
+  function closeMenu(){
     burger.classList.remove('active');
     burger.setAttribute('aria-expanded','false');
     nav.classList.remove('active');
     document.body.classList.remove('menu-open');
-  };
+    if (overlay && document.body.contains(overlay)) overlay.remove();
+  }
 
-  // Ensure menu starts closed (and closes on iOS bfcache restore)
+  // Ensure closed on load & on iOS bfcache restore
   closeMenu();
   window.addEventListener('pageshow', closeMenu);
 
-  // Toggle on burger
+  // Toggle
   burger.addEventListener('click', (e) => {
     e.preventDefault();
     nav.classList.contains('active') ? closeMenu() : openMenu();
   });
 
   // Close on mobile link click, then navigate
-  document.querySelectorAll('.nav-links a').forEach(a => {
+  document.querySelectorAll('#primary-navigation a').forEach(a => {
     a.addEventListener('click', (e) => {
       if (window.matchMedia('(max-width: 980px)').matches) {
         e.preventDefault();
@@ -165,13 +188,6 @@ function validateForm(e){
         setTimeout(() => { window.location.href = href; }, 120);
       }
     });
-  });
-
-  // Close when clicking the dimmed backdrop (outside header/nav)
-  document.addEventListener('click', (e) => {
-    if (!document.body.classList.contains('menu-open')) return;
-    const withinHeader = e.target.closest('header');
-    if (!withinHeader) closeMenu();
   });
 
   // Close if resized to desktop
