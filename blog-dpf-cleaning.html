@@ -7,7 +7,7 @@
   <meta name="description" content="How diesel economy maps work, realistic MPG gains, and best practices to keep your DPF healthy and unblocked."/>
   <link rel="canonical" href="https://your-domain.example/blog-dpf-cleaning.html"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/styles.css"/>
+  <link rel="stylesheet" href="assets/styles.css?v=6"/>
 </head>
 <body>
 <header class="carbon">
@@ -109,35 +109,18 @@
 }
 </script>
 
-<!-- ✅ Single, robust mobile menu controller with real overlay -->
+<!-- ✅ Single, robust mobile menu controller (CSS overlay handles dim) -->
 <script>
 (function(){
   const burger = document.querySelector('.burger');
   const nav = document.querySelector('#primary-navigation');
   if (!burger || !nav) return;
 
-  let overlay = null;
-
-  const makeOverlay = () => {
-    const el = document.createElement('div');
-    el.setAttribute('data-menu-overlay','');
-    Object.assign(el.style, {
-      position: 'fixed',
-      inset: '0',
-      background: 'rgba(0,0,0,.6)',
-      zIndex: '999'
-    });
-    el.addEventListener('click', closeMenu);
-    return el;
-  };
-
   function openMenu(){
     burger.classList.add('active');
     nav.classList.add('active');
     document.body.classList.add('menu-open');
     burger.setAttribute('aria-expanded','true');
-    if (!overlay){ overlay = makeOverlay(); }
-    if (!document.body.contains(overlay)){ document.body.appendChild(overlay); }
   }
 
   function closeMenu(){
@@ -145,7 +128,6 @@
     nav.classList.remove('active');
     document.body.classList.remove('menu-open');
     burger.setAttribute('aria-expanded','false');
-    if (overlay && document.body.contains(overlay)){ overlay.remove(); }
   }
 
   // Ensure closed on load and on iOS bfcache restore
@@ -168,6 +150,12 @@
         setTimeout(() => { window.location.href = href; }, 120);
       }
     });
+  });
+
+  // Click outside header closes (works with CSS overlay)
+  document.addEventListener('click', (e) => {
+    if (!document.body.classList.contains('menu-open')) return;
+    if (!e.target.closest('header')) closeMenu();
   });
 
   // Close on resize to desktop

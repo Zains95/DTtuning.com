@@ -7,7 +7,7 @@
   <meta name="description" content="Discover the real-world benefits of a Stage 1 ECU remap: stronger torque, smoother drivability, safer overtakes and more. UK-based, serving nationwide."/>
   <link rel="canonical" href="https://your-domain.example/blog-ecu-remapping.html"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/styles.css"/>
+  <link rel="stylesheet" href="assets/styles.css?v=6"/>
 </head>
 <body>
 <header class="carbon">
@@ -111,35 +111,18 @@
 }
 </script>
 
-<!-- ✅ Single, robust mobile menu controller with real overlay -->
+<!-- ✅ Single, robust mobile menu controller (CSS overlay handles dim) -->
 <script>
 (function(){
   const burger = document.querySelector('.burger');
   const nav = document.querySelector('#primary-navigation');
   if (!burger || !nav) return;
 
-  let overlay = null;
-
-  function createOverlay(){
-    const el = document.createElement('div');
-    el.setAttribute('data-menu-overlay','');
-    Object.assign(el.style, {
-      position:'fixed',
-      inset:'0',
-      background:'rgba(0,0,0,.6)',
-      zIndex:'999'
-    });
-    el.addEventListener('click', closeMenu);
-    return el;
-  }
-
   function openMenu(){
     burger.classList.add('active');
     nav.classList.add('active');
     document.body.classList.add('menu-open');
     burger.setAttribute('aria-expanded','true');
-    if (!overlay) overlay = createOverlay();
-    if (!document.body.contains(overlay)) document.body.appendChild(overlay);
   }
 
   function closeMenu(){
@@ -147,14 +130,13 @@
     nav.classList.remove('active');
     document.body.classList.remove('menu-open');
     burger.setAttribute('aria-expanded','false');
-    if (overlay && document.body.contains(overlay)) overlay.remove();
   }
 
-  // Ensure menu is closed on load and when page is restored from bfcache
+  // Ensure closed on load and on iOS bfcache restore
   closeMenu();
   window.addEventListener('pageshow', closeMenu);
 
-  // Toggle menu
+  // Toggle
   burger.addEventListener('click', (e) => {
     e.preventDefault();
     nav.classList.contains('active') ? closeMenu() : openMenu();
@@ -172,7 +154,13 @@
     });
   });
 
-  // Close if resized to desktop
+  // Click outside header closes (works with CSS body::before overlay)
+  document.addEventListener('click', (e) => {
+    if (!document.body.classList.contains('menu-open')) return;
+    if (!e.target.closest('header')) closeMenu();
+  });
+
+  // Close on resize to desktop
   window.addEventListener('resize', () => {
     if (window.innerWidth > 980) closeMenu();
   });

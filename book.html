@@ -6,7 +6,8 @@
   <title>Book a Remap — DT Tuning</title>
   <meta name="description" content="Book your remap and check expected gains."/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
-  <link href="assets/styles.css" rel="stylesheet"/>
+  <!-- Added cache-busting query string -->
+  <link href="assets/styles.css?v=6" rel="stylesheet"/>
 </head>
 <body>
 <header class="carbon">
@@ -128,17 +129,14 @@
     if (overlay && document.body.contains(overlay)) overlay.remove();
   }
 
-  // Ensure menu is closed on load & on iOS bfcache restore
   closeMenu();
   window.addEventListener('pageshow', closeMenu);
 
-  // Toggle on burger tap
   burger.addEventListener('click', (e) => {
     e.preventDefault();
     nav.classList.contains('active') ? closeMenu() : openMenu();
   });
 
-  // Close on mobile link click, then navigate
   document.querySelectorAll('#primary-navigation a').forEach(a => {
     a.addEventListener('click', (e) => {
       if (window.matchMedia('(max-width: 980px)').matches) {
@@ -150,12 +148,10 @@
     });
   });
 
-  // Close if resized to desktop
   window.addEventListener('resize', () => {
     if (window.innerWidth > 980) closeMenu();
   });
 
-  // ESC closes
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu();
   });
